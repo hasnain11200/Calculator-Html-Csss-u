@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP Calculator</title>
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    font-family: 'Arial', sans-serif;
+}
+.calculator {
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+.display {
+    background: #333;
+    color: #fff;
+    font-size: 2rem;
+    text-align: right;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    grid-gap: 15px;
+}
+button {
+    padding: 20px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background: linear-gradient(to bottom, #ff9966, #ff5e62);
+    color: #fff;
+    box-shadow: 0 5px #b34747;
+    transition: all 0.2s;
+}
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px #b34747;
+}
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px #b34747;
+}
+.operator {
+    background: linear-gradient(to bottom, #66ff99, #33cc66);
+    box-shadow: 0 5px #2a8a3a;
+}
+.equal {
+    background: linear-gradient(to bottom, #6699ff, #3366cc);
+    grid-row: 4 / 6; /* spans two rows vertically */
+    box-shadow: 0 5px #1a3a8a;
+}
+</style>
+</head>
+<body>
+<div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+        <!-- Row 1 -->
+        <button onclick="press('7')">7</button>
+        <button onclick="press('8')">8</button>
+        <button onclick="press('9')">9</button>
+        <button class="operator" onclick="press('/')">÷</button>
+        <!-- Row 2 -->
+        <button onclick="press('4')">4</button>
+        <button onclick="press('5')">5</button>
+        <button onclick="press('6')">6</button>
+        <button class="operator" onclick="press('*')">×</button>
+        <!-- Row 3 -->
+        <button onclick="press('1')">1</button>
+        <button onclick="press('2')">2</button>
+        <button onclick="press('3')">3</button>
+        <button class="operator" onclick="press('-')">−</button>
+        <!-- Row 4 -->
+        <button onclick="press('0')">0</button>
+        <button onclick="press('.')">.</button>
+        <button class="equal" onclick="calculate()">=</button>
+        <button class="operator" onclick="press('+')">+</button>
+        <!-- Optional Clear -->
+        <button onclick="clearDisplay()" style="grid-column: span 4; background:#E74C3C;">CC</button>
+    </div>
+</div>
+
+<script>
+let expression = '';
+const display = document.getElementById('display');
+
+function press(num) {
+    expression += num;
+    display.innerText = expression;
+}
+
+function calculate() {
+    try {
+        display.innerText = eval(expression);
+        expression = '';
+    } catch {
+        display.innerText = 'Error';
+        expression = '';
+    }
+}
+
+function clearDisplay() {
+    expression = '';
+    display.innerText = '0';
+}
+</script>
+</body>
+</html>
